@@ -449,12 +449,13 @@
         @media (max-width: 860px) {
             .hero .wrap {
                 grid-template-columns: 1fr;
+                gap: calc(var(--space-6) / 2);
             }
 
             .hero-logo-frame {
                 order: -1;
                 width: 180px;
-                margin-bottom: var(--space-2);
+                margin-bottom: var(--space-1);
             }
         }
 
@@ -603,8 +604,39 @@
             box-shadow: 0 0 0 3px rgba(231, 169, 76, 0.18);
         }
 
-        .demo {
+        .spoiler-note {
             margin-top: var(--space-5);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--radius);
+            background: var(--bg-elevated);
+        }
+
+        .spoiler-note .spoiler-icon {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .spoiler-note p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .spoiler-note strong {
+            color: var(--amber);
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+        }
+
+        .demo {
+            margin-top: var(--space-3);
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             gap: var(--space-3);
@@ -977,8 +1009,8 @@
         <section class="hero">
             <div class="wrap">
                 <div>
-                    <span class="hero-badge bracket"><span class="dot"></span> <span data-i18n="hero.badge">estudio de
-                            software · una persona</span></span>
+                    <span class="hero-badge bracket"><span class="dot"></span> <span data-i18n="hero.badge">El panda que
+                            programa</span></span>
                     <h1 data-i18n="hero.title">Hago software <span class="accent-word">porque me encanta</span>.</h1>
                     <p class="hero-sub" data-i18n="hero.sub">
                         Me llamo Toni. Soy un desarrollador que está empezando: todavía no tengo ningún producto
@@ -1003,7 +1035,7 @@
             <div class="wrap">
                 <div class="section-head reveal">
                     <p class="eyebrow" data-i18n="about.eyebrow">sobre-mi</p>
-                    <h2 data-i18n="about.h2">Un estudio de una sola persona. Literalmente.</h2>
+                    <h2 data-i18n="about.h2">Un estudio de una sola persona. </h2>
                 </div>
                 <div class="about-grid">
                     <div class="about-copy reveal">
@@ -1050,27 +1082,29 @@
                     <p class="eyebrow" data-i18n="project.eyebrow">proyecto-actual</p>
                     <span class="status-badge bracket"><span class="dot"></span> <span data-i18n="project.status">en
                             desarrollo</span></span>
-                    <h2 data-i18n="project.h2">Respuestas automáticas para reseñas de Google&nbsp;Maps.</h2>
+                    <h2 data-i18n="project.h2">Un proyecto para quitarte trabajo de encima.</h2>
                     <p class="lede" data-i18n="project.lede">
-                        Mi primer proyecto es una herramienta que lee las reseñas que recibe un negocio en
-                        Google&nbsp;Maps y genera una respuesta a cada una, con el tono que ese negocio necesita,
-                        en segundos — sin que nadie tenga que sentarse a escribirlas una por una.
+                        Mi primer proyecto es una herramienta pensada para pequeñas y medianas empresas: se encarga
+                        por ti, de forma automática, de una tarea repetitiva del día a día — para que dediques ese
+                        tiempo a lo que de verdad importa. De momento prefiero no destriparlo: en cuanto esté
+                        terminado del todo, cuento aquí exactamente qué hace.
                     </p>
+                </div>
+
+                <div class="spoiler-note reveal">
+                    <span class="spoiler-icon" aria-hidden="true">👀</span>
+                    <p data-i18n="demo.spoiler"><strong>Spoiler:</strong> un vistazo rápido de cómo se verá en
+                        acción — el resto sigue siendo secreto.</p>
                 </div>
 
                 <div class="demo reveal" id="demo">
                     <div class="demo-card">
-                        <p class="demo-label" data-i18n="demo.label1">Reseña recibida</p>
-                        <p class="stars">★★★★★</p>
-                        <p class="review-name" data-i18n="demo.reviewName">Ana R. · hace 2 días</p>
                         <p class="review-text" data-i18n="demo.reviewText">"Muy buena atención, el trato fue excelente y
                             todo muy rápido. Volveré seguro."</p>
                     </div>
                     <span class="demo-arrow">→</span>
                     <div class="demo-card reply-card">
                         <div class="reply-head">
-                            <img class="avatar" src="images/panda-transp.png" width="300" height="300" alt="">
-                            <span class="who" data-i18n="demo.replyWho">MegaPandaDev · respuesta automática</span>
                         </div>
                         <p class="reply-text" id="reply-text"><span class="cursor"></span></p>
                     </div>
@@ -1079,17 +1113,18 @@
                 <div class="feature-list reveal">
                     <div class="feature-item">
                         <h3 data-i18n="feature1.h3">Ahorra tiempo</h3>
-                        <p data-i18n="feature1.p">¿Tienes +500 reseñas sin contestar? Esta es tu aplicación.</p>
+                        <p data-i18n="feature1.p">¿Tienes tareas repetitivas que se acumulan cada semana? Esta es tu
+                            aplicación.</p>
                     </div>
                     <div class="feature-item">
-                        <h3 data-i18n="feature2.h3">Tú eliges el tono de respuesta</h3>
-                        <p data-i18n="feature2.p">Cada respuesta suena como el negocio, siempre con el mismo cuidado.
+                        <h3 data-i18n="feature2.h3">Tú mantienes el control</h3>
+                        <p data-i18n="feature2.p">Todo se hace a tu manera, con el mismo cuidado que le pondrías tú.
                         </p>
                     </div>
                     <div class="feature-item">
-                        <h3 data-i18n="feature3.h3">Cero reseñas sin responder</h3>
-                        <p data-i18n="feature3.p">Ninguna reseña se queda colgada por falta de tiempo. Ni siquiera las
-                            peores ni las escritas con mala leche.</p>
+                        <h3 data-i18n="feature3.h3">Cero cosas pendientes</h3>
+                        <p data-i18n="feature3.p">Nada se queda a medias por falta de tiempo. Ni siquiera lo más
+                            pesado.</p>
                     </div>
                 </div>
 
@@ -1143,7 +1178,7 @@
                 'nav.contact': 'Contacto',
                 'cta.email': 'Escríbeme',
                 'lang.toggle': 'EN',
-                'hero.badge': 'estudio de software · una persona',
+                'hero.badge': 'El panda que programa',
                 'hero.title': 'Hago software <span class="accent-word">porque me encanta</span>.',
                 'hero.sub': 'Me llamo Toni. Soy un desarrollador que está empezando: todavía no tengo ningún producto publicado, pero ya tengo el primero en marcha y le estoy poniendo todo el cuidado del mundo. Soy MegaPandaDev.',
                 'hero.cta1': 'Ver en qué estoy trabajando →',
@@ -1160,16 +1195,17 @@
                 'about.dt5': 'estado', 'about.dd5': 'disponible',
                 'project.eyebrow': 'proyecto-actual',
                 'project.status': 'en desarrollo',
-                'project.h2': 'Respuestas automáticas para reseñas de Google&nbsp;Maps.',
-                'project.lede': 'Mi primer proyecto es una herramienta que lee las reseñas que recibe un negocio en Google&nbsp;Maps y genera una respuesta a cada una, con el tono que ese negocio necesita, en segundos — sin que nadie tenga que sentarse a escribirlas una por una.',
-                'demo.label1': 'Reseña recibida',
-                'demo.reviewName': 'Ana R. · hace 2 días',
+                'project.h2': 'Un proyecto para quitarte trabajo de encima.',
+                'project.lede': 'Mi primer proyecto es una herramienta pensada para pequeñas y medianas empresas: se encarga por ti, de forma automática, de una tarea repetitiva del día a día — para que dediques ese tiempo a lo que de verdad importa. De momento prefiero no destriparlo: en cuanto esté terminado del todo, cuento aquí exactamente qué hace.',
+                'demo.label1': 'Pendiente',
+                'demo.reviewName': 'Recibido hace 2 días',
+                'demo.spoiler': '<strong>Spoiler:</strong> un vistazo rápido de cómo se verá en acción — el resto sigue siendo secreto.',
                 'demo.reviewText': '"Muy buena atención, el trato fue excelente y todo muy rápido. Volveré seguro."',
                 'demo.replyWho': 'MegaPandaDev · respuesta automática',
-                'reply.full': '"¡Muchas gracias por tu visita, Ana! Nos alegra mucho saber que la atención te gustó. Te esperamos pronto."',
-                'feature1.h3': 'Ahorra tiempo', 'feature1.p': '¿Tienes +500 reseñas sin contestar? Esta es tu aplicación.',
-                'feature2.h3': 'Tú eliges el tono de respuesta', 'feature2.p': 'Cada respuesta suena como el negocio, siempre con el mismo cuidado.',
-                'feature3.h3': 'Cero reseñas sin responder', 'feature3.p': 'Ninguna reseña se queda colgada por falta de tiempo. Ni siquiera las peores ni las escritas con mala leche.',
+                'reply.full': '"¡Muchas gracias por tu mensaje! Nos alegra mucho saber que todo fue bien. Aquí seguimos si necesitas cualquier cosa."',
+                'feature1.h3': 'Ahorra tiempo', 'feature1.p': '¿Tienes tareas repetitivas que se acumulan cada semana? Esta es tu aplicación.',
+                'feature2.h3': 'Tú mantienes el control', 'feature2.p': 'Todo se hace a tu manera, con el mismo cuidado que le pondrías tú.',
+                'feature3.h3': 'Cero cosas pendientes', 'feature3.p': 'Nada se queda a medias por falta de tiempo. Ni siquiera lo más pesado.',
                 'project.closing': 'Todavía está en construcción, pero es en lo que estoy metido ahora mismo. Si tienes un negocio y esto te suena útil, o simplemente quieres ver cómo avanza, escríbeme.',
                 'project.cta': 'Visita la web del proyecto →',
                 'contact.eyebrow': 'contacto',
@@ -1200,16 +1236,17 @@
                 'about.dt5': 'status', 'about.dd5': 'available',
                 'project.eyebrow': 'current-project',
                 'project.status': 'in development',
-                'project.h2': 'Automatic replies for Google&nbsp;Maps reviews.',
-                'project.lede': 'My first project is a tool that reads the reviews a business gets on Google&nbsp;Maps and generates a reply to each one, in the tone that business needs, in seconds — without anyone having to sit down and write them one by one.',
-                'demo.label1': 'Review received',
-                'demo.reviewName': 'Ana R. · 2 days ago',
+                'project.h2': 'A project to take work off your plate.',
+                'project.lede': 'My first project is a tool built for small and medium businesses: it automatically handles a repetitive day-to-day task for you — so you can spend that time on what actually matters. For now I\'d rather not spoil it: once it\'s fully finished, I\'ll share exactly what it does.',
+                'demo.label1': 'Pending',
+                'demo.reviewName': 'Received 2 days ago',
+                'demo.spoiler': '<strong>Spoiler:</strong> a quick peek at how it\'ll work in action — the rest stays secret.',
                 'demo.reviewText': '"Great service, everything was fast and the staff were excellent. I\'ll definitely be back."',
                 'demo.replyWho': 'MegaPandaDev · automatic reply',
-                'reply.full': '"Thank you so much for stopping by, Ana! We\'re really glad you enjoyed the service. See you again soon!"',
-                'feature1.h3': 'Saves time', 'feature1.p': 'Got 500+ reviews piling up unanswered? This is the tool for that.',
-                'feature2.h3': 'You choose the tone of the reply', 'feature2.p': 'Every reply sounds like the business, always with the same care.',
-                'feature3.h3': 'Zero unanswered reviews', 'feature3.p': 'No review is ever left hanging for lack of time. Not even the worst ones, or the ones written out of spite.',
+                'reply.full': '"Thank you so much for your message! We\'re really glad everything went well. We\'re here if you need anything else."',
+                'feature1.h3': 'Saves time', 'feature1.p': 'Got repetitive tasks piling up every week? This is the tool for that.',
+                'feature2.h3': 'You stay in control', 'feature2.p': 'Everything happens your way, with the same care you\'d put into it yourself.',
+                'feature3.h3': 'Zero things left pending', 'feature3.p': 'Nothing gets left half-done for lack of time. Not even the messiest stuff.',
                 'project.closing': 'It\'s still under construction, but it\'s what I\'m focused on right now. If you run a business and this sounds useful, or you just want to see how it\'s coming along, get in touch.',
                 'project.cta': 'Visit the project website →',
                 'contact.eyebrow': 'contact',
