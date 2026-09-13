@@ -42,7 +42,7 @@
             --border-strong: rgba(243, 241, 231, 0.20);
             --text: #F3F1E7;
             --text-muted: #A7AD9C;
-            --text-faint: #6C7362;
+            --text-faint: #7E8672;
             --accent: #86C35E;
             --accent-strong: #A2DA7C;
             --accent-ink: #0D1409;
@@ -62,6 +62,9 @@
 
             --maxw: 1120px;
             --radius: 4px;
+
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
         }
 
         *,
@@ -89,6 +92,12 @@
         ::selection {
             background: var(--accent);
             color: var(--accent-ink);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
         }
 
         a {
@@ -216,7 +225,7 @@
             color: var(--text-muted);
             position: relative;
             padding-bottom: 3px;
-            transition: color 0.2s ease;
+            transition: color 0.2s var(--ease-out);
         }
 
         nav.links a::after {
@@ -227,15 +236,20 @@
             bottom: 0;
             height: 2px;
             background: var(--accent);
-            transition: right 0.25s ease;
         }
 
-        nav.links a:hover {
-            color: var(--text);
-        }
+        @media (hover: hover) and (pointer: fine) {
+            nav.links a::after {
+                transition: right 0.2s var(--ease-out);
+            }
 
-        nav.links a:hover::after {
-            right: 0;
+            nav.links a:hover {
+                color: var(--text);
+            }
+
+            nav.links a:hover::after {
+                right: 0;
+            }
         }
 
         .nav-cta {
@@ -246,7 +260,7 @@
             border: 1px solid var(--border-strong);
             padding: 0.5rem 0.9rem;
             border-radius: var(--radius);
-            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
         }
 
         .nav-cta:hover {
@@ -344,14 +358,6 @@
             margin-bottom: var(--space-3);
         }
 
-        .hero-badge .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            display: inline-block;
-            box-shadow: 0 0 0 3px rgba(134, 195, 94, 0.18);
-        }
-
         .hero h1 {
             font-size: clamp(2.35rem, 4.4vw + 1rem, 4rem);
             max-width: 12ch;
@@ -385,7 +391,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5em;
-            transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            transition: transform 0.12s var(--ease-out), background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
         }
 
         .btn:active {
@@ -423,7 +429,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: float 5s ease-in-out infinite;
+            animation: float 5s var(--ease-in-out) infinite;
         }
 
         .hero-logo-frame img {
@@ -463,7 +469,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(18px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
         }
 
         .reveal.is-visible {
@@ -598,10 +604,51 @@
         }
 
         .status-badge .dot {
+            position: relative;
             width: 6px;
             height: 6px;
             background: var(--amber);
             box-shadow: 0 0 0 3px rgba(231, 169, 76, 0.18);
+            animation: dot-pulse 2s var(--ease-in-out) infinite;
+        }
+
+        .status-badge .dot::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--amber);
+            animation: dot-ping 2s var(--ease-out) infinite;
+        }
+
+        @keyframes dot-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.8);
+                opacity: 0.65;
+            }
+        }
+
+        @keyframes dot-ping {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(3.2);
+                opacity: 0;
+            }
+        }
+
+        .status-badge.bracket::before,
+        .status-badge.bracket::after {
+            border-color: var(--amber);
         }
 
         .spoiler-note {
@@ -804,7 +851,7 @@
             border: 1px solid var(--border-strong);
             padding: 1rem 1.5rem;
             border-radius: var(--radius);
-            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
         }
 
         .contact-email:hover {
@@ -813,12 +860,14 @@
             background: rgba(134, 195, 94, 0.07);
         }
 
-        .contact-email .arrow {
-            transition: transform 0.2s ease;
-        }
+        @media (hover: hover) and (pointer: fine) {
+            .contact-email .arrow {
+                transition: transform 0.2s var(--ease-out);
+            }
 
-        .contact-email:hover .arrow {
-            transform: translateX(4px);
+            .contact-email:hover .arrow {
+                transform: translateX(4px);
+            }
         }
 
         /* ---------- footer ---------- */
@@ -874,6 +923,15 @@
             .reply-text .cursor {
                 animation: none;
             }
+
+            .status-badge .dot {
+                animation: none;
+            }
+
+            .status-badge .dot::after {
+                animation: none;
+                display: none;
+            }
         }
 
         .nav-right {
@@ -893,7 +951,7 @@
             padding: 0.5rem 0.75rem;
             border-radius: var(--radius);
             cursor: pointer;
-            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
         }
 
         .lang-btn:hover {
@@ -923,7 +981,7 @@
             width: 16px;
             height: 2px;
             background: var(--text);
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.2s var(--ease-out), opacity 0.15s var(--ease-out);
         }
 
         .menu-btn.active span:nth-child(1) {
@@ -1009,7 +1067,7 @@
         <section class="hero">
             <div class="wrap">
                 <div>
-                    <span class="hero-badge bracket"><span class="dot"></span> <span data-i18n="hero.badge">El panda que
+                    <span class="hero-badge bracket"><span data-i18n="hero.badge">El panda que
                             programa</span></span>
                     <h1 data-i18n="hero.title">Hago software <span class="accent-word">porque me encanta</span>.</h1>
                     <p class="hero-sub" data-i18n="hero.sub">
@@ -1035,7 +1093,7 @@
             <div class="wrap">
                 <div class="section-head reveal">
                     <p class="eyebrow" data-i18n="about.eyebrow">sobre-mi</p>
-                    <h2 data-i18n="about.h2">Un estudio de una sola persona. </h2>
+                    <h2 data-i18n="about.h2">Un estudio de una sola persona. Literalmente.</h2>
                 </div>
                 <div class="about-grid">
                     <div class="about-copy reveal">
@@ -1099,12 +1157,16 @@
 
                 <div class="demo reveal" id="demo">
                     <div class="demo-card">
+                        <span class="stars" aria-label="5 de 5 estrellas">★★★★★</span>
                         <p class="review-text" data-i18n="demo.reviewText">"Muy buena atención, el trato fue excelente y
                             todo muy rápido. Volveré seguro."</p>
+                        <p class="review-name" data-i18n="demo.reviewName">Recibido hace 2 días</p>
                     </div>
                     <span class="demo-arrow">→</span>
                     <div class="demo-card reply-card">
                         <div class="reply-head">
+                            <img class="avatar" src="images/panda-transp.png" width="300" height="300" alt="">
+                            <span class="who" data-i18n="demo.replyWho">MegaPandaDev · respuesta automática</span>
                         </div>
                         <p class="reply-text" id="reply-text"><span class="cursor"></span></p>
                     </div>
@@ -1134,9 +1196,9 @@
                 </p>
 
                 <div class="reveal" style="margin-top: var(--space-4);">
-                    <!-- TODO: sustituye este enlace por la URL real de tu proyecto cuando lo publiques -->
-                    <a class="btn btn-primary" href="https://tu-proyecto-aqui.com" target="_blank"
-                        rel="noopener noreferrer" data-i18n="project.cta">Visita la web del proyecto →</a>
+                    <a class="btn btn-primary"
+                        href="mailto:megapandadev@gmail.com?subject=Av%C3%ADsame%20cuando%20el%20proyecto%20est%C3%A9%20listo"
+                        data-i18n="project.cta">Avísame cuando esté listo →</a>
                 </div>
             </div>
         </section>
@@ -1207,7 +1269,7 @@
                 'feature2.h3': 'Tú mantienes el control', 'feature2.p': 'Todo se hace a tu manera, con el mismo cuidado que le pondrías tú.',
                 'feature3.h3': 'Cero cosas pendientes', 'feature3.p': 'Nada se queda a medias por falta de tiempo. Ni siquiera lo más pesado.',
                 'project.closing': 'Todavía está en construcción, pero es en lo que estoy metido ahora mismo. Si tienes un negocio y esto te suena útil, o simplemente quieres ver cómo avanza, escríbeme.',
-                'project.cta': 'Visita la web del proyecto →',
+                'project.cta': 'Avísame cuando esté listo →',
                 'contact.eyebrow': 'contacto',
                 'contact.h2': 'Hablemos.',
                 'contact.lede': '¿Tienes un proyecto en mente, quieres colaborar, o simplemente saludar a un panda programador? Escríbeme — respondo yo mismo, literalmente no hay nadie más.',
@@ -1248,7 +1310,7 @@
                 'feature2.h3': 'You stay in control', 'feature2.p': 'Everything happens your way, with the same care you\'d put into it yourself.',
                 'feature3.h3': 'Zero things left pending', 'feature3.p': 'Nothing gets left half-done for lack of time. Not even the messiest stuff.',
                 'project.closing': 'It\'s still under construction, but it\'s what I\'m focused on right now. If you run a business and this sounds useful, or you just want to see how it\'s coming along, get in touch.',
-                'project.cta': 'Visit the project website →',
+                'project.cta': 'Notify me when it\'s ready →',
                 'contact.eyebrow': 'contact',
                 'contact.h2': 'Let\'s talk.',
                 'contact.lede': 'Got a project in mind, want to collaborate, or just want to say hi to a coding panda? Email me — I answer myself, there\'s literally no one else.',
